@@ -1,0 +1,50 @@
+$small-divices: 600px;
+$medium-divices: 768px;
+$large-divices: 992px;
+$extra-large-divices: 992px;
+
+.container{
+    display: grid;
+    max-width: 100%;
+    padding: 10px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    grid-template-areas: 
+        "TopThreeProducts"
+        "TopSuppliers"
+        "TotalOrderVolumen"
+        "IncomingDeliveries";
+}
+
+@media only screen and (min-width: $medium-divices) {
+    .container{
+        display: grid;
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 20px;
+        grid-template-areas:
+            "TopThreeProducts TopSuppliers"
+            "TotalOrderVolumen TotalOrderVolumen"
+            "IncomingDeliveries IncomingDeliveries";
+    }
+}
+
+@media only screen and (min-width: $large-divices) {
+    .container{
+        display: grid;
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+        grid-template-columns: 60% auto;
+        grid-template-rows: 50vh 50vh;
+        gap: 20px;
+        grid-template-areas: 
+            "TotalOrderVolumen TopThreeProducts"
+            "IncomingDeliveries TopSuppliers";
+    }
+}
+
