@@ -2,47 +2,23 @@ import React, { useState } from 'react';
 import { MONTHS } from '../../constants';
 import JSONData from '../../data/orders.json';
 import { Order, LineChartData } from '../../types';
+import ChartContainer from '../ChartContainer';
+import ChartInfo from '../ChartInfo';
+import Filter from '../Filter';
 import LineChart from './LineChart';
 import styles from './TotalOrderVolumen.module.scss';
 
 const TotalOrderVolumen: React.FC = () => {
 
-    const [orders, setOrders] = useState(JSONData);
+    const [orders, setOrders] = useState<Order[]>(JSONData);
     const [supplierFilter, setSupplierFilter] = useState<string>("all");
     const [categoryOneFilter, setCategoryOneFilter] = useState<string>("all");
     const [categoryTwoFilter, setCategoryTwoFilter] = useState<string>("all");
 
-    const testData = [
-        {
-            id: "Jan",
-            data: [
-                { x: 1, y: 400 },
-                { x: 4, y: 1600 },
-                { x: 2, y: 800 }
-            ]
-        },
-        {
-            id: "Feb",
-            data: [
-                { x: 1, y: 200 },
-                { x: 4, y: 600 },
-                { x: 2, y: 900 }
-            ]
-        },
-        {
-            id: "Mar",
-            data: [
-                { x: 4, y: 2000 },
-                { x: 8, y: 7600 },
-                { x: 3, y: 400 }
-            ]
-        }
-    ]
-
-    const getOrderVolumen: LineChartData[] = () => {
+    const getOrderVolumen = () => {
 
         const data = MONTHS.map((month, indx) => {
-            const amountOrdered = {
+            const amountOrdered: LineChartData = {
                 id: month,
                 data: []
             };
@@ -61,8 +37,19 @@ const TotalOrderVolumen: React.FC = () => {
             return amountOrdered;
         })
 
-        return [...data];
+        console.log(data)
+        return data.slice(0, 1);
     }
+
+    const getNumberInAMonth = (month: number, year: number) => {
+
+        const date = new Date(year, month, 0)
+        const numberOfDays = date.getDate();
+
+        console.log(numberOfDays)
+    }
+
+    getNumberInAMonth(7, 2020);
 
     const getOrderDay = (stringDate: string) => {
         const date = new Date(stringDate);
@@ -100,68 +87,46 @@ const TotalOrderVolumen: React.FC = () => {
         }
     }
 
-    const renderSupplierFilter = () => {
+    const renderFilters = () => {
+        //get array of all values
         const suppliers = orders.map(order => order.supplier)
-        const uniqueSuppliers = getUniqueValues(suppliers);
-
-        return (
-            <select
-                className={styles.filterSelect}
-                onChange={handleFilterChange}
-                name="suppliers"
-            >
-                <option value="all">Suppliers</option>
-                {uniqueSuppliers.map((supplier, indx) => (
-                    <option key={indx} value={supplier}>{supplier}</option>
-                ))}
-            </select>
-        );
-    }
-
-    const renderCategoryOneFilter = () => {
         const categoryOne = orders.map(order => order.productCategory1);
         const categoryTwo = orders.map(order => order.productCategory2);
+        //get only unique values
+        const uniqueSuppliers = getUniqueValues(suppliers);
         const uniqueCategorieOne = getUniqueValues(categoryOne);
         const uniqueCategorieTwo = getUniqueValues(categoryTwo);
 
         return (
             <>
-                <select
-                    className={styles.filterSelect}
-                    onChange={handleFilterChange}
-                    name="categoryOne"
-                >
-                    <option value="all">First Category</option>
-                    {uniqueCategorieOne.map((category, indx) => (
-                        <option key={indx} value={category}>{category}</option>
-                    ))}
-                </select>
-                <select
-                    className={styles.filterSelect}
-                    onChange={handleFilterChange}
-                    name="categoryTwo"
-                >
-                    <option value="all">Seccond Category</option>
-                    {uniqueCategorieTwo.map((category, indx) => (
-                        <option key={indx} value={category}>{category}</option>
-                    ))}
-                </select>
-
+                <Filter
+                    name={"suppliers"}
+                    values={uniqueSuppliers}
+                    changeHadler={handleFilterChange}
+                    allOption={true}
+                />
+                <Filter
+                    name={"categoryOne"}
+                    values={uniqueCategorieOne}
+                    changeHadler={handleFilterChange}
+                    allOption={true}
+                />
+                <Filter
+                    name={"categoryTwo"}
+                    values={uniqueCategorieTwo}
+                    changeHadler={handleFilterChange}
+                    allOption={true}
+                />
             </>
-        )
+        );
     }
 
     return (
-        <div className={styles.container}>
-            <div className={styles.wrapper}>
-                <h3>Order Volumen:</h3>
-                <div className={styles.filterWrapper}>
-                    {renderSupplierFilter()}
-                    {renderCategoryOneFilter()}
-                </div>
-            </div>
-
-            <LineChart data={getOrderVolumen()} />
+        <div className={styles.gridArea}>
+            <ChartContainer>
+                <ChartInfo chartTitle="Order Volumen" filters={renderFilters} />
+                <LineChart data={getOrderVolumen()} />
+            </ChartContainer>
         </div>
     );
 }

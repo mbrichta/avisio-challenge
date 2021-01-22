@@ -5,10 +5,10 @@ import './Global.scss';
 
 const App: React.FC = () => {
   return (
-    <div>
+    <>
       <Navbar />
       <Dashboard />
-    </div>
+    </>
   );
 }
 
