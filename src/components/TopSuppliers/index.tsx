@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { DashboardProps, Order } from '../../types';
 import ChartContainer from '../ChartContainer';
 import ChartInfo from '../ChartInfo';
+import PieChart from '../Charts/PieChart';
 import Filter from '../Filter';
 import styles from './TopSuppliers.module.scss';
 
 const TopSuppliers: React.FC<DashboardProps> = ({ orders }) => {
 
     const [filter, setFilter] = useState<string>("Currency");
+
+
 
     const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const { value } = e.target;
@@ -26,7 +29,9 @@ const TopSuppliers: React.FC<DashboardProps> = ({ orders }) => {
     return (
         <ChartContainer>
             <ChartInfo chartTitle="Top Suppliers" filters={renderFilters} />
-            <div></div>
+            <div className={styles.chartWrapper}>
+                <PieChart />
+            </div>
         </ChartContainer>
     );
 }
