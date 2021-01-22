@@ -23,11 +23,9 @@ const TopThreeProducts: React.FC = () => {
     }
 
     return (
-        <div className={styles.gridArea}>
-            <ChartContainer>
-                <ChartInfo chartTitle="Top Three Products" filters={renderFilter} />
-            </ChartContainer>
-        </div>
+        <ChartContainer>
+            <ChartInfo chartTitle="Top Three Products" filters={renderFilter} />
+        </ChartContainer>
     );
 }
 

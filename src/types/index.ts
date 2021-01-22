@@ -19,3 +19,7 @@ export type LineChartData = {
     id: string | number
     data: DataPoint[]
 }
+
+export type MarginObject = {
+    [P: string]: [number, number]
+}

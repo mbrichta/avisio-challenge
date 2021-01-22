@@ -5,11 +5,9 @@ import styles from './IncomingDeliveries.module.scss';
 
 const IncomingDeliveries: React.FC = () => {
     return (
-        <div className={styles.gridArea}>
-            <ChartContainer>
-                <ChartInfo chartTitle="Incoming Deliveries" />
-            </ChartContainer>
-        </div>
+        <ChartContainer>
+            <ChartInfo chartTitle="Incoming Deliveries" />
+        </ChartContainer>
     );
 }
 

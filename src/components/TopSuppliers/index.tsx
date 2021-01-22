@@ -23,11 +23,10 @@ const TopSuppliers: React.FC = () => {
     }
 
     return (
-        <div className={styles.gridArea}>
-            <ChartContainer>
-                <ChartInfo chartTitle="Top Suppliers" filters={renderFilters} />
-            </ChartContainer>
-        </div>
+        <ChartContainer>
+            <ChartInfo chartTitle="Top Suppliers" filters={renderFilters} />
+            <div></div>
+        </ChartContainer>
     );
 }
 

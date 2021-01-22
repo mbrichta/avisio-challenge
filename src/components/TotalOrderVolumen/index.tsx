@@ -5,7 +5,6 @@ import { Order, LineChartData } from '../../types';
 import ChartContainer from '../ChartContainer';
 import ChartInfo from '../ChartInfo';
 import Filter from '../Filter';
-import LineChart from './LineChart';
 import styles from './TotalOrderVolumen.module.scss';
 
 const TotalOrderVolumen: React.FC = () => {
@@ -122,12 +121,9 @@ const TotalOrderVolumen: React.FC = () => {
     }
 
     return (
-        <div className={styles.gridArea}>
-            <ChartContainer>
-                <ChartInfo chartTitle="Order Volumen" filters={renderFilters} />
-                <LineChart data={getOrderVolumen()} />
-            </ChartContainer>
-        </div>
+        <ChartContainer>
+            <ChartInfo chartTitle="Order Volumen" filters={renderFilters} />
+        </ChartContainer>
     );
 }
 
