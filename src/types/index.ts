@@ -10,6 +10,10 @@ export type Order = {
     deliveryDate: string
 }
 
+export interface DashboardProps {
+    orders: Order[]
+}
+
 interface DataPoint {
     x: number | string | Date
     y: number | string | Date

@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
 import ChartContainer from '../ChartContainer';
-import ChartInfo from '../ChartInfo';
+import ChartInfo from '../ChartInfo'
+import { Order, DashboardProps } from '../../types/index'
 import Filter from '../Filter';
 import styles from './TopThreeProducts.module.scss';
+import BarChart from '../Charts/BarChart';
 
-const TopThreeProducts: React.FC = () => {
+const TopThreeProducts: React.FC<DashboardProps> = ({ orders }) => {
 
-    const [filter, setFilter] = useState<string>("Euro Amount");
+    const [productData, setProductData] = useState();
+    const [filter, setFilter] = useState<string>("Currency");
+
+    const getUniqueProducts = () => {
+
+    }
+
+    const getProductData = (orders: Order[]) => {
+
+    }
 
     const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const { value } = e.target;
@@ -15,7 +26,7 @@ const TopThreeProducts: React.FC = () => {
     }
 
     const renderFilter = () => {
-        const filter = ["Euro Amount", "Quantity"];
+        const filter = ["Currency", "Quantity"];
 
         return (
             <Filter name={"filter"} values={filter} changeHadler={handleFilterChange} />
@@ -25,6 +36,9 @@ const TopThreeProducts: React.FC = () => {
     return (
         <ChartContainer>
             <ChartInfo chartTitle="Top Three Products" filters={renderFilter} />
+            <div className={styles.chartWrapper}>
+                <BarChart />
+            </div>
         </ChartContainer>
     );
 }

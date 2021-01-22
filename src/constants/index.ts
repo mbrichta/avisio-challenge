@@ -7,10 +7,10 @@ export const COLUMNS = { lg: 12, md: 8, sm: 4, xs: 2, xxs: 1 };
 // Determins the items position in each breakpoint
 export const LAYOUT = {
     lg: [
-        { i: "TotalOrderVolumen", x: 0, y: 0, w: 8, h: 1 },
-        { i: "TopThreeProducts", x: 8, y: 0, w: 4, h: 1 },
-        { i: "TopSuppliers", x: 8, y: 2, w: 4, h: 1 },
-        { i: "IncomingDeliveries", x: 0, y: 3, w: 8, h: 1 }
+        { i: "TotalOrderVolumen", x: 0, y: 0, w: 7, h: 1 },
+        { i: "TopThreeProducts", x: 8, y: 0, w: 5, h: 1 },
+        { i: "TopSuppliers", x: 8, y: 2, w: 5, h: 1 },
+        { i: "IncomingDeliveries", x: 0, y: 3, w: 7, h: 1 }
     ],
     md: [
         { i: "TotalOrderVolumen", x: 0, y: 0, w: 5, h: 1 },

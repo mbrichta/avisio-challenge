@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { MONTHS } from '../../constants';
-import JSONData from '../../data/orders.json';
-import { Order, LineChartData } from '../../types';
+import { LineChartData, DashboardProps } from '../../types';
 import ChartContainer from '../ChartContainer';
 import ChartInfo from '../ChartInfo';
 import Filter from '../Filter';
 import styles from './TotalOrderVolumen.module.scss';
 
-const TotalOrderVolumen: React.FC = () => {
+const TotalOrderVolumen: React.FC<DashboardProps> = ({ orders }) => {
 
-    const [orders, setOrders] = useState<Order[]>(JSONData);
     const [supplierFilter, setSupplierFilter] = useState<string>("all");
     const [categoryOneFilter, setCategoryOneFilter] = useState<string>("all");
     const [categoryTwoFilter, setCategoryTwoFilter] = useState<string>("all");

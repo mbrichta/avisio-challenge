@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import IncomingDeliveries from '../IncomingDeliveries';
 import TopSuppliers from '../TopSuppliers';
 import TopThreeProducts from '../TopThreeProducts';
 import TotalOrderVolumen from '../TotalOrderVolumen';
-import JSONData from '../../data/orders.json';
 import './Dashboard.scss';
 import { LAYOUT, BREAKPOINTS, COLUMNS } from '../../constants';
+import { Context } from '../../Context';
+
 
 // Handles the responsive nature of the grid
 const MyResponsiveGrid = WidthProvider(Responsive);
 
-
 const Dashboard: React.FC = () => {
 
-    const [orders, setOrders] = useState(JSONData);
+    const { orders } = useContext(Context);
 
     return (
         <MyResponsiveGrid
@@ -25,23 +25,23 @@ const Dashboard: React.FC = () => {
             margin={[20, 20]}
             containerPadding={[30, 30]}
             useCSSTransforms={true}
-            preventCollision={false}
+            preventCollision={true}
             layouts={LAYOUT}
         >
             <div key="TotalOrderVolumen" >
-                <TotalOrderVolumen />
+                <TotalOrderVolumen orders={orders} />
             </div>
 
             <div key="TopThreeProducts" >
-                <TopThreeProducts />
+                <TopThreeProducts orders={orders} />
             </div>
 
             <div key="TopSuppliers" >
-                <TopSuppliers />
+                <TopSuppliers orders={orders} />
             </div>
 
             <div key="IncomingDeliveries" >
-                <IncomingDeliveries />
+                <IncomingDeliveries orders={orders} />
             </div>
 
 
