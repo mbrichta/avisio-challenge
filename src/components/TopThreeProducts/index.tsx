@@ -8,13 +8,13 @@ import BarChart from '../Charts/BarChart';
 
 const TopThreeProducts: React.FC<DashboardProps> = ({ orders }) => {
 
-    const [topThreeProducts, setTopThreeProducts] = useState<ProductData[]>([])
+    const [chartData, setChartData] = useState<ProductData[]>([])
     const [filter, setFilter] = useState<string>("Currency");
 
     useEffect(() => {
         const products = getProductData();
         const topThree = getTopThreeProducts(products)
-        setTopThreeProducts(topThree)
+        setChartData(topThree)
     }, [filter])
 
     const getTopThreeProducts = (products: ProductData[]) => {
@@ -36,7 +36,7 @@ const TopThreeProducts: React.FC<DashboardProps> = ({ orders }) => {
 
         const productData: ProductData[] = uniqueNames.map(name => {
 
-            //Get an Array of the same products
+            //Get orders of the same products
             const sameProduct = orders.filter(order => order.productName === name);
 
             //Get the total amount of the order and add them
@@ -72,7 +72,7 @@ const TopThreeProducts: React.FC<DashboardProps> = ({ orders }) => {
         <ChartContainer>
             <ChartInfo chartTitle="Top Three Products" filters={renderFilter} />
             <div className={styles.chartWrapper}>
-                <BarChart data={topThreeProducts} filter={filter} />
+                <BarChart data={chartData} filter={filter} />
             </div>
         </ChartContainer>
     );

@@ -29,12 +29,23 @@ export type LineChartData = {
     data: DataPoint[]
 }
 
+export type PieChartData = {
+    id: string,
+    value: number
+}
+
 export type MarginObject = {
     [P: string]: [number, number]
 }
 
 export type ProductData = {
     product: string,
+    currency: number,
+    quantity: number
+}
+
+export type SupplierData = {
+    supplier: string,
     currency: number,
     quantity: number
 }
