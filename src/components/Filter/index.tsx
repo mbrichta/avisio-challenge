@@ -5,10 +5,11 @@ interface Props {
     name: string,
     values: string[],
     changeHadler: (e: React.ChangeEvent<HTMLSelectElement>) => void,
-    allOption?: boolean
+    allOption?: boolean,
+    firstOptionText?: string
 }
 
-const Filter: React.FC<Props> = ({ name, values, changeHadler, allOption = false }) => {
+const Filter: React.FC<Props> = ({ name, values, changeHadler, allOption = false, firstOptionText }) => {
     return (
         <>
             <select
@@ -16,7 +17,7 @@ const Filter: React.FC<Props> = ({ name, values, changeHadler, allOption = false
                 onChange={changeHadler}
                 name={name}
             >
-                {allOption ? (<option value="all">All</option>) : null}
+                {allOption ? (<option value="all">{firstOptionText ? firstOptionText : "All"}</option>) : null}
                 {values.map((value, indx) => (
                     <option key={indx} value={value}>{value}</option>
                 ))}

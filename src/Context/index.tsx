@@ -25,7 +25,7 @@ const ContextProvider: React.FC = ({ children }) => {
     const formatDate = (stringDate: string) => {
         const wrongFormatDate = new Date(stringDate);
         const month = wrongFormatDate.getDate();
-        const day = wrongFormatDate.getMonth();
+        const day = wrongFormatDate.getMonth() + 1;
         const year = wrongFormatDate.getFullYear();
 
         return new Date(year, month, day)
@@ -47,7 +47,15 @@ const ContextProvider: React.FC = ({ children }) => {
     }
 
     return (
-        <Context.Provider value={{ orders, getUniqueValues, formatDate, getTotalFromOrder, getTotalOrderVolumen }}>
+        <Context.Provider
+            value={{
+                orders,
+                getUniqueValues,
+                formatDate,
+                getTotalFromOrder,
+                getTotalOrderVolumen
+            }}
+        >
             {children}
         </Context.Provider>
     )

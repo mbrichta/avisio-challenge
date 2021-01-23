@@ -10,7 +10,7 @@ export type Order = {
     price: string;
     quantity: string | number;
     deliveryDate: string;
-    receive?: boolean
+    recieved?: boolean
 }
 
 // Shape of Dashboard Props

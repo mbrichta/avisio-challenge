@@ -17,26 +17,36 @@ const TotalOrderVolumen: React.FC<DashboardProps> = ({ orders }) => {
         getTotalOrderVolumen
     } = useContext(Context);
 
-    const [filters, setFilters] = useState({ suppliers: "all", categoryOne: "all", categoryTwo: "all" })
-    const [chartData, setChartData] = useState<LineChartData[]>([])
-    const [supplierFilter, setSupplierFilter] = useState<string>("all");
-    const [categoryOneFilter, setCategoryOneFilter] = useState<string>("all");
-    const [categoryTwoFilter, setCategoryTwoFilter] = useState<string>("all");
+    const [filters, setFilters] = useState({ month: "full year", suppliers: "all", categoryOne: "all", categoryTwo: "all" });
+    const [chartData, setChartData] = useState<LineChartData[]>([]);
 
     useEffect(() => {
         const filteredOrders: Order[] = applyFilters(orders);
         const ordersByMonth: Order[][] = getOrdersByMonth(filteredOrders);
 
-        const yearlyData = getYearlyChartData(ordersByMonth, '2020')
+        getDailyChartData(ordersByMonth, filters.month, 2020)
+        const yearlyData = getMonthlyChartData(ordersByMonth, 2020)
         setChartData(yearlyData);
 
     }, [filters]);
 
-    const getYearlyChartData = (ordersByMonth: Order[][], year: string) => {
+    const getDailyChartData = (ordersByMonth: Order[][], month: string, year: number) => {
+
+        const monthNumberValue = MONTHS.indexOf(month) + 1;
+        const dayInMonth = new Date(year, monthNumberValue, 0).getDate();
+        const orderInMonth = ordersByMonth[monthNumberValue];
+        const ordersInDay = orderInMonth.map(order => formatDate(order.orderedOn).getDate());
+
+
+        //console.log(ordersInDay)
+    }
+
+
+    const getMonthlyChartData = (ordersByMonth: Order[][], year: number) => {
 
         const dataPoints: DataPoint[] = ordersByMonth.map((month, indx) => {
-            const monthlyOrderVolumen = getTotalOrderVolumen(month)
-            const monthString = MONTHS[indx]
+            const monthlyOrderVolumen = getTotalOrderVolumen(month);
+            const monthString = MONTHS[indx];
 
             return { "x": monthString, "y": monthlyOrderVolumen }
         })
@@ -64,9 +74,6 @@ const TotalOrderVolumen: React.FC<DashboardProps> = ({ orders }) => {
         return filteredOrders;
     }
 
-    const getChartData = (orders: Order[]) => {
-
-    }
 
     const getOrdersByMonth = (orders: Order[]) => {
 
@@ -94,16 +101,16 @@ const TotalOrderVolumen: React.FC<DashboardProps> = ({ orders }) => {
         const { value, name } = e.target;
 
         switch (name) {
+            case "month":
+                setFilters({ ...filters, [name]: value });
+                break;
             case "suppliers":
-                setSupplierFilter(value);
                 setFilters({ ...filters, [name]: value });
                 break;
             case "categoryOne":
-                setCategoryOneFilter(value);
                 setFilters({ ...filters, [name]: value });
                 break;
             case "categoryTwo":
-                setCategoryTwoFilter(value)
                 setFilters({ ...filters, [name]: value });
                 break;
         }
@@ -123,6 +130,13 @@ const TotalOrderVolumen: React.FC<DashboardProps> = ({ orders }) => {
 
         return (
             <>
+                <Filter
+                    name={"month"}
+                    values={MONTHS}
+                    changeHadler={handleFilterChange}
+                    allOption={true}
+                    firstOptionText={"Full year"}
+                />
                 <Filter
                     name={"suppliers"}
                     values={uniqueSuppliers}

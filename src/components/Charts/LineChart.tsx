@@ -11,10 +11,11 @@ const LineChart: React.FC<Props> = ({ data }) => {
     return (
         <ResponsiveLine
             data={data}
-            margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+            margin={{ top: 15, right: 110, bottom: 50, left: 60 }}
             xScale={{ type: 'point' }}
             yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
-            yFormat=" >-.2f"
+            yFormat=" >-.2~f"
+            lineWidth={4}
             axisTop={null}
             axisRight={null}
             axisBottom={{
@@ -22,7 +23,7 @@ const LineChart: React.FC<Props> = ({ data }) => {
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: 'transportation',
+                legend: 'Months',
                 legendOffset: 36,
                 legendPosition: 'middle'
             }}
@@ -31,11 +32,11 @@ const LineChart: React.FC<Props> = ({ data }) => {
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: 'count',
+                legend: 'Euros',
                 legendOffset: -40,
                 legendPosition: 'middle'
             }}
-            pointSize={10}
+            pointSize={6}
             pointColor={{ theme: 'background' }}
             pointBorderWidth={2}
             pointBorderColor={{ from: 'serieColor' }}
