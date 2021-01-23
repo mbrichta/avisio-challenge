@@ -9,7 +9,8 @@ export type Order = {
     orderedOn: string;
     price: string;
     quantity: string | number;
-    deliveryDate: string
+    deliveryDate: string;
+    receive?: boolean
 }
 
 // Shape of Dashboard Props
@@ -18,9 +19,9 @@ export interface DashboardProps {
 }
 
 // Shape of Line chart point
-interface DataPoint {
-    x: number | string | Date
-    y: number | string | Date
+export interface DataPoint {
+    "x": number | string | Date
+    "y": number | string | Date
 }
 
 // Type for Line chart Data

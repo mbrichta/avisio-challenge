@@ -1,3 +1,9 @@
-// .gridArea {
-//     grid-area: IncomingDeliveries;
-// }
+.tableHeader {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    padding: 10px 10px;
+    border: solid 0.8px #dddcdc;
+    border-radius: 5px;
+}

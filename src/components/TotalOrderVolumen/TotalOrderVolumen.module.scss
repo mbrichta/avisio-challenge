@@ -1,24 +1,5 @@
 @import '../../Global.scss';
 
-// .gridArea{
-//     grid-area: TotalOrderVolumen;
-// }
-
-.wrapper {
-    display: flex;
-    justify-content: space-between;
-    height: 30px;
-}
-
-.filterWrapper {
-    display: flex;
-}
-
-.filterSelect {
-    padding: 5px;
-    margin: 0 5px;
-    -webkit-box-shadow: 0px 1px 7px 0px rgba(0,0,0,0.76); 
-    box-shadow: 0px 1px 7px 0px rgba(0,0,0,0.76);
-    font-size: 0.8rem;
-    border-radius: 5px;
+.chartWrapper {
+    height: 90%;
 }

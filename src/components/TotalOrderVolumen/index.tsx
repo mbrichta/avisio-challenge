@@ -1,72 +1,94 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { MONTHS } from '../../constants';
-import { LineChartData, DashboardProps } from '../../types';
+import { Context } from '../../Context';
+import { LineChartData, DashboardProps, Order, DataPoint } from '../../types';
 import ChartContainer from '../ChartContainer';
 import ChartInfo from '../ChartInfo';
+import LineChart from '../Charts/LineChart';
 import Filter from '../Filter';
 import styles from './TotalOrderVolumen.module.scss';
 
 const TotalOrderVolumen: React.FC<DashboardProps> = ({ orders }) => {
 
+    const {
+        getUniqueValues,
+        formatDate,
+        getTotalFromOrder,
+        getTotalOrderVolumen
+    } = useContext(Context);
+
+    const [filters, setFilters] = useState({ suppliers: "all", categoryOne: "all", categoryTwo: "all" })
+    const [chartData, setChartData] = useState<LineChartData[]>([])
     const [supplierFilter, setSupplierFilter] = useState<string>("all");
     const [categoryOneFilter, setCategoryOneFilter] = useState<string>("all");
     const [categoryTwoFilter, setCategoryTwoFilter] = useState<string>("all");
 
-    const getOrderVolumen = () => {
+    useEffect(() => {
+        const filteredOrders: Order[] = applyFilters(orders);
+        const ordersByMonth: Order[][] = getOrdersByMonth(filteredOrders);
 
-        const data = MONTHS.map((month, indx) => {
-            const amountOrdered: LineChartData = {
-                id: month,
-                data: []
-            };
+        const yearlyData = getYearlyChartData(ordersByMonth, '2020')
+        setChartData(yearlyData);
 
-            orders.map(order => {
-                const orderedMonth = getMonthStringFromDate(order.orderedOn);
-                const orderedDay = getOrderDay(order.orderedOn);
+    }, [filters]);
 
-                if (month === orderedMonth) {
-                    const amount = Number(order.price) * Number(order.quantity);
-                    const day = getOrderDay(order.orderedOn)
-                    amountOrdered.data.push({ x: day, y: amount })
-                }
-            })
+    const getYearlyChartData = (ordersByMonth: Order[][], year: string) => {
 
-            return amountOrdered;
+        const dataPoints: DataPoint[] = ordersByMonth.map((month, indx) => {
+            const monthlyOrderVolumen = getTotalOrderVolumen(month)
+            const monthString = MONTHS[indx]
+
+            return { "x": monthString, "y": monthlyOrderVolumen }
         })
 
-        console.log(data)
-        return data.slice(0, 1);
+        const chartData: LineChartData = {
+            id: year,
+            data: dataPoints
+        }
+
+        return [chartData];
     }
 
-    const getNumberInAMonth = (month: number, year: number) => {
+    const applyFilters = (orders: Order[]) => {
+        let filteredOrders = orders.filter(order => (
+            filters.suppliers === 'all' ? order : order.supplier === filters.suppliers
+        ))
 
-        const date = new Date(year, month, 0)
-        const numberOfDays = date.getDate();
+        filteredOrders = filteredOrders.filter(order => (
+            filters.categoryOne === 'all' ? order : order.productCategory1 === filters.categoryOne
+        ))
+        filteredOrders = filteredOrders.filter(order => (
+            filters.categoryTwo === 'all' ? order : order.productCategory2 === filters.categoryTwo
+        ))
 
-        console.log(numberOfDays)
+        return filteredOrders;
     }
 
-    getNumberInAMonth(7, 2020);
+    const getChartData = (orders: Order[]) => {
 
-    const getOrderDay = (stringDate: string) => {
-        const date = new Date(stringDate);
-        const day = date.getMonth() + 1;
-
-        return day;
     }
 
-    const getMonthStringFromDate = (stringDate: string) => {
-        const date = new Date(stringDate);
-        const month = date.getDate();
+    const getOrdersByMonth = (orders: Order[]) => {
 
-        return MONTHS[month - 1];
+        const orderData = orders.map(order => (
+            { ...order, orderTotal: getTotalFromOrder(order) }
+        ))
+
+        const ordersInSameMonth = MONTHS.map((month, indx) => {
+            const orders = orderData.filter(order => {
+                const date = formatDate(order.orderedOn);
+
+                return date.getMonth() === indx;
+            })
+
+            return orders.filter(order => order !== undefined)
+        })
+
+        return ordersInSameMonth;
     }
 
-    const getUniqueValues = (array: string[]) => {
-        const uniqueValues = new Set(array);
 
-        return Array.from(uniqueValues);
-    }
+    //console.log(getOrdersByMonth())
 
     const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const { value, name } = e.target;
@@ -74,15 +96,20 @@ const TotalOrderVolumen: React.FC<DashboardProps> = ({ orders }) => {
         switch (name) {
             case "suppliers":
                 setSupplierFilter(value);
+                setFilters({ ...filters, [name]: value });
                 break;
             case "categoryOne":
                 setCategoryOneFilter(value);
+                setFilters({ ...filters, [name]: value });
                 break;
             case "categoryTwo":
                 setCategoryTwoFilter(value)
+                setFilters({ ...filters, [name]: value });
                 break;
         }
     }
+
+
 
     const renderFilters = () => {
         //get array of all values
@@ -121,6 +148,9 @@ const TotalOrderVolumen: React.FC<DashboardProps> = ({ orders }) => {
     return (
         <ChartContainer>
             <ChartInfo chartTitle="Order Volumen" filters={renderFilters} />
+            <div className={styles.chartWrapper}>
+                <LineChart data={chartData} />
+            </div>
         </ChartContainer>
     );
 }

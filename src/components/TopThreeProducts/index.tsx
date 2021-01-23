@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ChartContainer from '../ChartContainer';
 import ChartInfo from '../ChartInfo'
 import { Order, DashboardProps, ProductData } from '../../types/index'
 import Filter from '../Filter';
 import styles from './TopThreeProducts.module.scss';
 import BarChart from '../Charts/BarChart';
+import { Context } from '../../Context';
 
 const TopThreeProducts: React.FC<DashboardProps> = ({ orders }) => {
+
+    const { getUniqueValues } = useContext(Context);
 
     const [chartData, setChartData] = useState<ProductData[]>([])
     const [filter, setFilter] = useState<string>("Currency");
@@ -32,7 +35,7 @@ const TopThreeProducts: React.FC<DashboardProps> = ({ orders }) => {
     const getProductData = () => {
 
         const productNames = orders.map(order => order.productName);
-        const uniqueNames = Array.from(new Set(productNames))
+        const uniqueNames = getUniqueValues(productNames);
 
         const productData: ProductData[] = uniqueNames.map(name => {
 

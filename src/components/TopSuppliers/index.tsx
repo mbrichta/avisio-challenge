@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { Context } from '../../Context';
 import { DashboardProps, Order, PieChartData, SupplierData } from '../../types';
 import ChartContainer from '../ChartContainer';
 import ChartInfo from '../ChartInfo';
@@ -7,6 +8,8 @@ import Filter from '../Filter';
 import styles from './TopSuppliers.module.scss';
 
 const TopSuppliers: React.FC<DashboardProps> = ({ orders }) => {
+
+    const { getUniqueValues, getTotalFromOrder } = useContext(Context);
 
     const [filter, setFilter] = useState<string>("Currency");
     const [chartData, setChartData] = useState<PieChartData[]>([]);
@@ -37,7 +40,7 @@ const TopSuppliers: React.FC<DashboardProps> = ({ orders }) => {
     const getSupplierData = () => {
 
         const suppliersName = orders.map(order => order.supplier);
-        const uniqueNames = Array.from(new Set(suppliersName));
+        const uniqueNames = getUniqueValues(suppliersName);
 
         const suppliersData: SupplierData[] = uniqueNames.map(name => {
 
@@ -45,11 +48,11 @@ const TopSuppliers: React.FC<DashboardProps> = ({ orders }) => {
             const ordersFromSameSupplier = orders.filter(order => order.supplier === name);
 
             //Get the total amount of the order and add them
-            const totalCurrency = ordersFromSameSupplier.map(order => (Number(order.quantity) * Number(order.price)));
+            const totalCurrency = ordersFromSameSupplier.map(order => getTotalFromOrder(order));
             const totalCurrencyFromSupplier = totalCurrency.reduce((acc, curr) => acc += curr);
             //Get the total cuantity and add them
-            const totalQuantity = ordersFromSameSupplier.map(order => Number(order.quantity))
-            const totalQuantityFromSupplier = totalQuantity.reduce((acc, curr) => acc += curr)
+            const totalQuantity = ordersFromSameSupplier.map(order => Number(order.quantity));
+            const totalQuantityFromSupplier = totalQuantity.reduce((acc, curr) => acc += curr);
 
             return { supplier: name, currency: Math.ceil(totalCurrencyFromSupplier), quantity: totalQuantityFromSupplier }
         })
