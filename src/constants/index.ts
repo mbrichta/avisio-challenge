@@ -1,9 +1,9 @@
 export const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 // Determines the screen breakpoints for the columns
-export const BREAKPOINTS = { md: 996, sm: 768, xs: 480, xxs: 320 };
+export const BREAKPOINTS = { lg: 1000, md: 996, sm: 768, xs: 480 };
 // How many columns are available at each breakpoint
-export const COLUMNS = { lg: 12, md: 8, sm: 4, xs: 2, xxs: 1 };
+export const COLUMNS = { lg: 12, md: 8, sm: 4, xs: 2 };
 // Determins the items position in each breakpoint
 export const LAYOUT = {
     lg: [

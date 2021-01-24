@@ -13,7 +13,8 @@ const LineChart: React.FC<Props> = ({ data }) => {
         <ResponsiveLine
             data={data}
             theme={CHART_THEME}
-            margin={{ top: 35, right: 80, bottom: 50, left: 60 }}
+            colors={{ "scheme": "category10" }}
+            margin={{ top: 30, right: 20, bottom: 50, left: 60 }}
             xScale={{ type: 'point' }}
             yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
             yFormat=" >-.2~f"
@@ -22,9 +23,9 @@ const LineChart: React.FC<Props> = ({ data }) => {
             axisRight={null}
             axisBottom={{
                 orient: 'bottom',
-                tickSize: 5,
+                tickSize: 6,
                 tickPadding: 5,
-                tickRotation: 0,
+                tickRotation: -45,
                 legend: 'Months',
                 legendOffset: 40,
                 legendPosition: 'middle'
@@ -46,11 +47,11 @@ const LineChart: React.FC<Props> = ({ data }) => {
             useMesh={true}
             legends={[
                 {
-                    anchor: 'bottom-right',
+                    anchor: 'top-right',
                     direction: 'column',
                     justify: false,
-                    translateX: 100,
-                    translateY: 0,
+                    translateX: 35,
+                    translateY: -25,
                     itemsSpacing: 0,
                     itemDirection: 'left-to-right',
                     itemWidth: 80,

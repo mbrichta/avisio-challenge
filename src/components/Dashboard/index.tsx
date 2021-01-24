@@ -25,12 +25,11 @@ const Dashboard: React.FC = () => {
     }, []);
 
     const onBreakpointChange = (breakpoint: string) => {
-        setCurrentBreakpoint(breakpoint)
-        console.log(breakpoint)
+        setCurrentBreakpoint(breakpoint);
     };
 
     const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
-        setLayout({ ...layouts, currentBreakpoit: layout })
+        setLayout({ ...layouts, currentBreakpoit: layout });
     }
 
     return (

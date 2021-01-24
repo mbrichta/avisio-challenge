@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '../../Context';
 import { DashboardProps, Order } from '../../types';
-import ChartContainer from '../ChartContainer';
 import ChartInfo from '../ChartInfo';
 import styles from './IncomingDeliveries.module.scss';
 
@@ -10,14 +9,18 @@ const CURRENT_DATE = new Date(2020, 5, 10);
 
 const IncomingDeliveries: React.FC<DashboardProps> = ({ orders }) => {
 
-    const { formatDate, getTotalFromOrder, getUniqueValues, getTotalOrderVolumen } = useContext(Context);
+    const {
+        formatDate,
+        getTotalFromOrder,
+        getUniqueValues,
+        getTotalOrderVolumen
+    } = useContext(Context);
 
     const [incomingDeliveries, setIncomingDeliveries] = useState<Order[]>([]);
 
     useEffect(() => {
         const incomingDeliveries = getIncomingDeliveries(orders);
         setIncomingDeliveries(incomingDeliveries);
-
     }, [])
 
     const getIncomingDeliveries = (order: Order[]) => {
@@ -46,10 +49,7 @@ const IncomingDeliveries: React.FC<DashboardProps> = ({ orders }) => {
         })
 
         return groupedBySupplier.map((group, index) => {
-            const productIDs = group.map(order => order.productId);
-            const suppliers = group.map(order => order.supplier);
-            const orderDate = group.map(order => formatDate(order.orderedOn));
-            const totalAmount = group.map(order => getTotalFromOrder(order));
+
             return (
                 <div key={index} className={styles.orderGroup}>
                     <div className={styles.columnSupplier}>
