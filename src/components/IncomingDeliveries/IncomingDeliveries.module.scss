@@ -1,3 +1,67 @@
-// .gridArea {
-//     grid-area: IncomingDeliveries;
-// }
+.container {
+    width: 100%;
+    height: 100%;
+    -webkit-box-shadow: 0px 1px 7px 0px rgba(0,0,0,0.76); 
+    box-shadow: 0px 1px 7px 0px rgba(0,0,0,0.76);
+    border-radius: 15px;
+    background-color: #2b3847;
+}
+
+.tableWrapper{
+    max-height: 90%;
+    display: flex;
+    flex-direction: column;
+    margin: 25px 15px 25px 15px;
+    color: #d7d1bc;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 1px 7px 0px rgba(0,0,0,0.76); 
+    box-shadow: 0px 1px 7px 0px rgba(0,0,0,0.76);
+}
+
+.tableHeader {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    background-color: #323f53;
+    padding: 10px 0px;
+    font-weight: bold;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.orderGroup{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    height: auto;
+    padding: 5px 0px;
+    align-self: end;
+    background-color: #1e2531;
+}
+
+.orderGroup:last-of-type{
+    border-radius: 0px 0px 5px 5px;
+}
+
+.orderGroup:nth-child(odd) {
+    background-color: #1e2531b9;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-around;
+    padding: 5px 0px;
+    text-align: center;
+}
+.columnSupplier{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0px;
+    text-align: center;
+    font-weight: 500;
+}
