@@ -1,7 +1,7 @@
 export const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 // Determines the screen breakpoints for the columns
-export const BREAKPOINTS = { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 320 };
+export const BREAKPOINTS = { md: 996, sm: 768, xs: 480, xxs: 320 };
 // How many columns are available at each breakpoint
 export const COLUMNS = { lg: 12, md: 8, sm: 4, xs: 2, xxs: 1 };
 // Determins the items position in each breakpoint
@@ -38,4 +38,30 @@ export const DASHBOARD_MARGINS = {
     m: [30, 30],
     sm: [20, 20],
     xs: [10, 10]
+}
+
+export const CHART_THEME = {
+    "background": "#2b3847",
+    "textColor": "#d3c499",
+    "fontSize": 13,
+    "axis": {
+        "domain": {
+            "line": {
+                "stroke": "#867e7e",
+                "strokeWidth": 2
+            }
+        },
+        "ticks": {
+            "line": {
+                "stroke": "#384a5d",
+                "strokeWidth": 2
+            }
+        }
+    },
+    "grid": {
+        "line": {
+            "stroke": "#e0c671",
+            "strokeWidth": 1
+        }
+    }
 }

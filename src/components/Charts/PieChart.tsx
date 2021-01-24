@@ -1,6 +1,7 @@
 import React from 'react';
 import { ResponsivePie } from '@nivo/pie'
 import { PieChartData } from '../../types';
+import { CHART_THEME } from '../../constants';
 
 // const data = [
 //     {
@@ -43,7 +44,7 @@ interface Props {
 const PieChart: React.FC<Props> = ({ data, filter }) => (
     <ResponsivePie
         data={data}
-        margin={{ top: 15, right: 15, bottom: 80, left: 15 }}
+        margin={{ top: 35, right: 5, bottom: 75, left: 5 }}
         innerRadius={0.3}
         cornerRadius={3}
         enableRadialLabels={false}
@@ -51,36 +52,11 @@ const PieChart: React.FC<Props> = ({ data, filter }) => (
         borderWidth={1}
         borderColor={{ from: 'color', modifiers: [['darker', 0.2]] }}
         radialLabelsSkipAngle={10}
-        radialLabelsTextColor="#333333"
         radialLabelsLinkColor={{ from: 'color' }}
         sliceLabel={d => filter === "Currency" ? `${d.value}€` : d.value}
         sliceLabelsSkipAngle={10}
         sliceLabelsTextColor="inherit:darker(1.6)"
-        theme={{
-            "background": "#ffffff",
-            "textColor": "#333333",
-            "fontSize": 14,
-            "axis": {
-                "domain": {
-                    "line": {
-                        "stroke": "#777777",
-                        "strokeWidth": 1
-                    }
-                },
-                "ticks": {
-                    "line": {
-                        "stroke": "#777777",
-                        "strokeWidth": 1
-                    }
-                }
-            },
-            "grid": {
-                "line": {
-                    "stroke": "#dddddd",
-                    "strokeWidth": 2
-                }
-            }
-        }}
+        theme={CHART_THEME}
         legends={[
             {
                 anchor: 'bottom',
@@ -89,10 +65,10 @@ const PieChart: React.FC<Props> = ({ data, filter }) => (
                 translateX: 0,
                 translateY: 56,
                 itemsSpacing: 30,
-                itemWidth: 100,
+                itemWidth: 60,
                 itemHeight: 30,
                 itemTextColor: '#999',
-                itemDirection: 'left-to-right',
+                itemDirection: 'top-to-bottom',
                 itemOpacity: 1,
                 symbolSize: 18,
                 symbolShape: 'circle',

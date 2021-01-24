@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ResponsiveLine } from '@nivo/line';
 import { LineChartData } from '../../types/index';
+import { CHART_THEME } from '../../constants';
 
 interface Props {
     data: LineChartData[]
@@ -11,7 +12,8 @@ const LineChart: React.FC<Props> = ({ data }) => {
     return (
         <ResponsiveLine
             data={data}
-            margin={{ top: 15, right: 110, bottom: 50, left: 60 }}
+            theme={CHART_THEME}
+            margin={{ top: 35, right: 80, bottom: 50, left: 60 }}
             xScale={{ type: 'point' }}
             yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
             yFormat=" >-.2~f"
@@ -24,7 +26,7 @@ const LineChart: React.FC<Props> = ({ data }) => {
                 tickPadding: 5,
                 tickRotation: 0,
                 legend: 'Months',
-                legendOffset: 36,
+                legendOffset: 40,
                 legendPosition: 'middle'
             }}
             axisLeft={{
@@ -33,7 +35,7 @@ const LineChart: React.FC<Props> = ({ data }) => {
                 tickPadding: 5,
                 tickRotation: 0,
                 legend: 'Euros',
-                legendOffset: -40,
+                legendOffset: -50,
                 legendPosition: 'middle'
             }}
             pointSize={6}

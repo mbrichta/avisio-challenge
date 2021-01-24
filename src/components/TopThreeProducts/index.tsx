@@ -72,12 +72,12 @@ const TopThreeProducts: React.FC<DashboardProps> = ({ orders }) => {
     }
 
     return (
-        <ChartContainer>
+        <div className={styles.container}>
             <ChartInfo chartTitle="Top Three Products" filters={renderFilter} />
-            <div className={styles.chartWrapper}>
+            <div className={styles.wrapper}>
                 <BarChart data={chartData} filter={filter} />
             </div>
-        </ChartContainer>
+        </div>
     );
 }
 

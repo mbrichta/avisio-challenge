@@ -75,12 +75,12 @@ const TopSuppliers: React.FC<DashboardProps> = ({ orders }) => {
     }
 
     return (
-        <ChartContainer>
+        <div className={styles.container}>
             <ChartInfo chartTitle="Top Suppliers" filters={renderFilters} />
-            <div className={styles.chartWrapper}>
+            <div className={styles.wrapper}>
                 <PieChart data={chartData} filter={filter} />
             </div>
-        </ChartContainer>
+        </div>
     );
 }
 

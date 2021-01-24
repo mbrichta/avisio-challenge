@@ -1,6 +1,7 @@
 import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 import { ProductData } from '../../types';
+import { CHART_THEME } from '../../constants';
 
 interface Props {
     data: ProductData[]
@@ -10,42 +11,19 @@ interface Props {
 const BarChart: React.FC<Props> = ({ data, filter }) => (
     <ResponsiveBar
         data={data}
+
         keys={filter === "Currency" ? ["currency"] : ["quantity"]}
         indexBy="product"
         borderRadius={3}
         margin={{
-            "top": 15,
+            "top": 35,
             "right": 10,
             "bottom": 50,
             "left": 50
         }}
         padding={0.3}
         colors={{ scheme: 'category10' }}
-        theme={{
-            "background": "#ffffff",
-            "textColor": "#333333",
-            "fontSize": 14,
-            "axis": {
-                "domain": {
-                    "line": {
-                        "stroke": "#777777",
-                        "strokeWidth": 1
-                    }
-                },
-                "ticks": {
-                    "line": {
-                        "stroke": "#777777",
-                        "strokeWidth": 1
-                    }
-                }
-            },
-            "grid": {
-                "line": {
-                    "stroke": "#dddddd",
-                    "strokeWidth": 2
-                }
-            }
-        }}
+        theme={CHART_THEME}
         borderColor="inherit:darker(1.6)"
         axisBottom={{
             "tickSize": 3,
@@ -53,13 +31,13 @@ const BarChart: React.FC<Props> = ({ data, filter }) => (
             "tickRotation": 0,
             "legend": "Products",
             "legendPosition": "middle",
-            "legendOffset": 35
+            "legendOffset": 40
         }}
         axisLeft={{
             "tickSize": 3,
             "tickPadding": 3,
             "tickRotation": 0,
-            "legend": filter === "Currency" ? "Currency" : "Quantity",
+            "legend": filter === "Currency" ? "Currency ( € )" : "Quantity",
             "legendPosition": "middle",
             "legendOffset": -40
         }}

@@ -52,21 +52,19 @@ const IncomingDeliveries: React.FC<DashboardProps> = ({ orders }) => {
             const totalAmount = group.map(order => getTotalFromOrder(order));
             return (
                 <div key={index} className={styles.orderGroup}>
-                    <div className={styles.column}>
-                        {group.map(order => (
-                            <div>{order.productId}</div>
-                        ))}
+                    <div className={styles.columnSupplier}>
+                        <p key={group[0].productId}>{group[0].supplier}</p>
                     </div>
                     <div className={styles.column}>
                         {group.map(order => (
-                            <div>{order.supplier}</div>
+                            <div key={order.productId}>{order.productName}</div>
                         ))}
                     </div>
                     <div className={styles.column}>
                         {group.map(order => {
                             const formatedDate = formatDate(order.deliveryDate);
                             return (
-                                <div>
+                                <div key={order.productId}>
                                     {`${formatedDate.getDate()}/${formatedDate.getMonth()}/${formatedDate.getFullYear()}`}
                                 </div>
                             )
@@ -74,7 +72,7 @@ const IncomingDeliveries: React.FC<DashboardProps> = ({ orders }) => {
                     </div>
                     <div className={styles.column}>
                         {group.map(order => (
-                            <div>{getTotalFromOrder(order)}</div>
+                            <div key={order.productId}>{getTotalFromOrder(order)}</div>
                         ))}
                     </div>
                 </div>
@@ -84,18 +82,18 @@ const IncomingDeliveries: React.FC<DashboardProps> = ({ orders }) => {
 
 
     return (
-        <ChartContainer>
+        <div className={styles.container}>
             <ChartInfo chartTitle="Incoming Deliveries" />
             <div className={styles.tableWrapper}>
                 <div className={styles.tableHeader}>
-                    <div className={styles.column}>Product ID:</div>
                     <div className={styles.column}>Supplier:</div>
+                    <div className={styles.column}>Product Name:</div>
                     <div className={styles.column}>Delivery Date:</div>
                     <div className={styles.column}>Total Amount:</div>
                 </div>
                 {renderIncomingDeliveries()}
             </div>
-        </ChartContainer>
+        </div>
     );
 }
 

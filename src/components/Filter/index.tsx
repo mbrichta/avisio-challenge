@@ -13,7 +13,7 @@ const Filter: React.FC<Props> = ({ name, values, changeHadler, allOption = false
     return (
         <>
             <select
-                className={styles.filterSelect}
+                className={styles.select}
                 onChange={changeHadler}
                 name={name}
             >

@@ -1,10 +1,54 @@
 .wrapper {
     display: flex;
     justify-content: space-between;
-    height: 30px;
-    margin-bottom: 15px;
+    padding: 15px 10px;
+    background-color: #323f53;
+    border-radius: 15px 15px 0px 0px;
 }
 
 .filterWrapper {
     display: flex;
+}
+
+h3 {
+    font-size: 1.2rem;
+    margin: 0;
+    color: #d7d1bc;
+  }
+
+/* Small devices (portrait tablets and large phones, 768px and down) */
+@media only screen and (max-width: 768px) {
+    .wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 10px;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .filterWrapper {
+        display: flex;
+        flex-direction: row;
+    }
+    
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    main{
+        margin: 0 auto;
+        max-width: 1200px;
+    }  
+
 }

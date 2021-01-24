@@ -130,13 +130,7 @@ const TotalOrderVolumen: React.FC<DashboardProps> = ({ orders }) => {
 
         return (
             <>
-                <Filter
-                    name={"month"}
-                    values={MONTHS}
-                    changeHadler={handleFilterChange}
-                    allOption={true}
-                    firstOptionText={"Full year"}
-                />
+
                 <Filter
                     name={"suppliers"}
                     values={uniqueSuppliers}
@@ -160,12 +154,19 @@ const TotalOrderVolumen: React.FC<DashboardProps> = ({ orders }) => {
     }
 
     return (
-        <ChartContainer>
+        <div className={styles.container}>
             <ChartInfo chartTitle="Order Volumen" filters={renderFilters} />
-            <div className={styles.chartWrapper}>
+            <div className={styles.wrapper}>
+                <Filter
+                    name={"month"}
+                    values={MONTHS}
+                    changeHadler={handleFilterChange}
+                    allOption={true}
+                    firstOptionText={"Full year"}
+                />
                 <LineChart data={chartData} />
             </div>
-        </ChartContainer>
+        </div>
     );
 }
 
