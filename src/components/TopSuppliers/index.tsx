@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '../../Context';
 import { DashboardProps, Order, PieChartData, SupplierData } from '../../types';
-import ChartContainer from '../ChartContainer';
 import ChartInfo from '../ChartInfo';
 import PieChart from '../Charts/PieChart';
 import Filter from '../Filter';

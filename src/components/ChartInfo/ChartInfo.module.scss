@@ -20,7 +20,7 @@ h3 {
 @media only screen and (max-width: 768px) {
     .wrapper {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
         margin-bottom: 10px;
         max-width: 100%;
@@ -34,9 +34,9 @@ h3 {
     }
 
     h3 {
-        font-size: 1rem;
-        margin: 0;
+        font-size: 0.8rem;
         color: #d7d1bc;
+        margin-bottom: 10px;
       }
     
 }

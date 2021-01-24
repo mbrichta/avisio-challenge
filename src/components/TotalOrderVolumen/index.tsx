@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { MONTHS } from '../../constants';
 import { Context } from '../../Context';
 import { LineChartData, DashboardProps, Order, DataPoint } from '../../types';
-import ChartContainer from '../ChartContainer';
 import ChartInfo from '../ChartInfo';
 import LineChart from '../Charts/LineChart';
 import Filter from '../Filter';
@@ -17,7 +16,7 @@ const TotalOrderVolumen: React.FC<DashboardProps> = ({ orders }) => {
         getTotalOrderVolumen
     } = useContext(Context);
 
-    const [filters, setFilters] = useState({ month: "full year", suppliers: "all", categoryOne: "all", categoryTwo: "all" });
+    const [filters, setFilters] = useState({ month: "all", suppliers: "all", categoryOne: "all", categoryTwo: "all" });
     const [chartData, setChartData] = useState<LineChartData[]>([]);
 
     useEffect(() => {
@@ -25,16 +24,13 @@ const TotalOrderVolumen: React.FC<DashboardProps> = ({ orders }) => {
         const ordersByMonth: Order[][] = getOrdersByMonth(filteredOrders);
         const monthNumber = MONTHS.indexOf(filters.month) + 1;
 
-        if (filters.month === "full year") {
+        if (filters.month === "all") {
             const chartData = getMonthlyChartData(ordersByMonth, 2020)
             setChartData(chartData);
         } else {
             const chartData = getDailyChartData(ordersByMonth, monthNumber, 2020);
             setChartData(chartData);
         }
-
-        console.log(getDailyChartData(ordersByMonth, 4, 2020))
-
 
     }, [filters]);
 

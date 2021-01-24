@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import ChartContainer from '../ChartContainer';
 import ChartInfo from '../ChartInfo'
 import { Order, DashboardProps, ProductData } from '../../types/index'
 import Filter from '../Filter';
