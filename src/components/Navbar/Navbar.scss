@@ -1,3 +1,5 @@
+@import '../../Global.scss';
+
 .navbar{
     display: flex;
     width: 100%;
@@ -6,6 +8,6 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    color: #d7d1bc;
-    background-color: #323f53;
+    color: $font-color;
+    background-color: $primary-color;
 }

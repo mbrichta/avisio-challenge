@@ -1,13 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Layout, Layouts, Responsive, WidthProvider } from 'react-grid-layout';
+import { Responsive, WidthProvider } from 'react-grid-layout';
 import IncomingDeliveries from '../IncomingDeliveries';
 import TopSuppliers from '../TopSuppliers';
 import TopThreeProducts from '../TopThreeProducts';
 import TotalOrderVolumen from '../TotalOrderVolumen';
-import './Dashboard.scss';
 import { LAYOUT, BREAKPOINTS, COLUMNS } from '../../constants';
-import { Context } from '../../Context';
-
+import { Context } from '../../context';
+import './Dashboard.scss';
 
 // Handles the responsive nature of the grid
 const MyResponsiveGrid = WidthProvider(Responsive);
@@ -16,21 +15,11 @@ const Dashboard: React.FC = () => {
 
     const { orders } = useContext(Context);
 
-    const [currentBreakpoit, setCurrentBreakpoint] = useState("lg");
-    const [layout, setLayout] = useState<Layouts>(LAYOUT);
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
         setMounted(true);
     }, []);
-
-    const onBreakpointChange = (breakpoint: string) => {
-        setCurrentBreakpoint(breakpoint);
-    };
-
-    const onLayoutChange = (layout: Layout[], layouts: Layouts) => {
-        setLayout({ ...layouts, currentBreakpoit: layout });
-    }
 
     return (
         <main>
@@ -44,10 +33,8 @@ const Dashboard: React.FC = () => {
                 containerPadding={[30, 30]}
                 useCSSTransforms={mounted}
                 preventCollision={false}
-                layouts={layout}
+                layouts={LAYOUT}
                 compactType={"vertical"}
-                onBreakpointChange={onBreakpointChange}
-                onLayoutChange={onLayoutChange}
             >
                 <div key="TotalOrderVolumen">
                     <TotalOrderVolumen orders={orders} />
@@ -64,8 +51,6 @@ const Dashboard: React.FC = () => {
                 <div key="IncomingDeliveries" >
                     <IncomingDeliveries orders={orders} />
                 </div>
-
-
             </MyResponsiveGrid >
         </main>
     );

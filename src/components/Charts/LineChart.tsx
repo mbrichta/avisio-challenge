@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ResponsiveLine } from '@nivo/line';
 import { LineChartData } from '../../types/index';
 import { CHART_THEME } from '../../constants';

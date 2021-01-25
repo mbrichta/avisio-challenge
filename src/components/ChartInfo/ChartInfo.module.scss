@@ -1,9 +1,12 @@
+@import '../../Global.scss';
+
 .wrapper {
     display: flex;
     justify-content: space-between;
     padding: 15px 10px;
-    background-color: #323f53;
+    background-color: $primary-color;
     border-radius: 15px 15px 0px 0px;
+    color: $font-color;
 }
 
 .filterWrapper {
@@ -13,7 +16,6 @@
 h3 {
     font-size: 1.2rem;
     margin: 0;
-    color: #d7d1bc;
   }
 
 /* Small devices (portrait tablets and large phones, 768px and down) */
@@ -35,20 +37,9 @@ h3 {
 
     h3 {
         font-size: 0.8rem;
-        color: #d7d1bc;
         margin-bottom: 10px;
       }
     
-}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-
-}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */

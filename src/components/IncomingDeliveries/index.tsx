@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Context } from '../../Context';
+import { Context } from '../../context';
 import { DashboardProps, Order } from '../../types';
 import ChartInfo from '../ChartInfo';
 import styles from './IncomingDeliveries.module.scss';
 
-// I'm going to set a arbitrary date to be able to play with the data
+// I'm going to set a arbitrary date to simulate incoming deliveries
 const CURRENT_DATE = new Date(2020, 5, 10);
 
 const IncomingDeliveries: React.FC<DashboardProps> = ({ orders }) => {
@@ -13,7 +13,6 @@ const IncomingDeliveries: React.FC<DashboardProps> = ({ orders }) => {
         formatDate,
         getTotalFromOrder,
         getUniqueValues,
-        getTotalOrderVolumen
     } = useContext(Context);
 
     const [incomingDeliveries, setIncomingDeliveries] = useState<Order[]>([]);
@@ -23,7 +22,7 @@ const IncomingDeliveries: React.FC<DashboardProps> = ({ orders }) => {
         setIncomingDeliveries(incomingDeliveries);
     }, [])
 
-    const getIncomingDeliveries = (order: Order[]) => {
+    const getIncomingDeliveries = (orders: Order[]) => {
         const orderDates: Order[] = orders.map(order => {
             const deliveryDate = formatDate(order.deliveryDate);
 
@@ -41,9 +40,8 @@ const IncomingDeliveries: React.FC<DashboardProps> = ({ orders }) => {
 
     const renderIncomingDeliveries = () => {
         const suppliers = getUniqueValues(incomingDeliveries.map(order => order.supplier));
-        //const groupedSuppliers = [];
         const groupedBySupplier = suppliers.map(sup => {
-            const sameSupplier = incomingDeliveries.filter(order => order.supplier === sup)
+            const sameSupplier = incomingDeliveries.filter(order => order.supplier === sup);
 
             return sameSupplier
         })
@@ -63,6 +61,7 @@ const IncomingDeliveries: React.FC<DashboardProps> = ({ orders }) => {
                     <div className={styles.column}>
                         {group.map(order => {
                             const formatedDate = formatDate(order.deliveryDate);
+
                             return (
                                 <div key={order.productId}>
                                     {`${formatedDate.getDate()}/${formatedDate.getMonth()}/${formatedDate.getFullYear()}`}

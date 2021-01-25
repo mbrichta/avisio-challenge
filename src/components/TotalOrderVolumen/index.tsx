@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { MONTHS } from '../../constants';
-import { Context } from '../../Context';
+import { Context } from '../../context';
 import { LineChartData, DashboardProps, Order, DataPoint } from '../../types';
 import ChartInfo from '../ChartInfo';
 import LineChart from '../Charts/LineChart';
@@ -25,7 +25,7 @@ const TotalOrderVolumen: React.FC<DashboardProps> = ({ orders }) => {
         const monthNumber = MONTHS.indexOf(filters.month) + 1;
 
         if (filters.month === "all") {
-            const chartData = getMonthlyChartData(ordersByMonth, 2020)
+            const chartData = getMonthlyChartData(ordersByMonth, 2020);
             setChartData(chartData);
         } else {
             const chartData = getDailyChartData(ordersByMonth, monthNumber, 2020);
@@ -36,7 +36,6 @@ const TotalOrderVolumen: React.FC<DashboardProps> = ({ orders }) => {
 
     const getDailyChartData = (ordersByMonth: Order[][], month: number, year: number) => {
 
-        console.log(ordersByMonth)
         const daysInMonth = new Date(year, month, 0).getDate();
         const orderInMonth = ordersByMonth[month - 1];
         let ordersInDay = orderInMonth.map(order => ({ ...order, orderedDay: formatDate(order.orderedOn).getDate() }));
@@ -46,14 +45,15 @@ const TotalOrderVolumen: React.FC<DashboardProps> = ({ orders }) => {
         }
 
         dataPoints = dataPoints.map((point, indx) => {
-            const sameDayOrders = ordersInDay.filter(order => point.x === order.orderedDay)
+            const sameDayOrders = ordersInDay.filter(order => point.x === order.orderedDay);
 
             if (ordersInDay) {
-                const total = getTotalOrderVolumen(sameDayOrders)
-                //console.log(ordersInDay)
-                return { x: point.x, y: total }
+                const total = getTotalOrderVolumen(sameDayOrders);
+
+                return { x: point.x, y: total };
             } else {
-                return point
+
+                return point;
             }
         })
 
@@ -72,7 +72,7 @@ const TotalOrderVolumen: React.FC<DashboardProps> = ({ orders }) => {
             const monthlyOrderVolumen = getTotalOrderVolumen(month);
             const monthString = MONTHS[indx];
 
-            return { "x": monthString, "y": monthlyOrderVolumen }
+            return { "x": monthString, "y": monthlyOrderVolumen };
         })
 
         const chartData: LineChartData = {
@@ -149,7 +149,6 @@ const TotalOrderVolumen: React.FC<DashboardProps> = ({ orders }) => {
 
         return (
             <>
-
                 <Filter
                     name={"suppliers"}
                     values={uniqueSuppliers}

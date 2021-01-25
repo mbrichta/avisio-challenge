@@ -1,10 +1,7 @@
+@import '../../Global.scss';
+
 .container {
-    width: 100%;
-    height: 100%;
-    -webkit-box-shadow: 0px 1px 7px 0px rgba(0,0,0,0.76); 
-    box-shadow: 0px 1px 7px 0px rgba(0,0,0,0.76);
-    border-radius: 15px;
-    background-color: #2b3847;
+    @include container;
 }
 
 .tableWrapper{
@@ -14,18 +11,18 @@
     margin: 25px 15px 25px 15px;
     color: #d7d1bc;
     border-radius: 5px;
-    -webkit-box-shadow: 0px 1px 7px 0px rgba(0,0,0,0.76); 
-    box-shadow: 0px 1px 7px 0px rgba(0,0,0,0.76);
+    @include box-shadow;
 }
 
 .tableHeader {
     display: flex;
     width: 100%;
     justify-content: space-between;
-    background-color: #323f53;
+    background-color: $primary-color;
     padding: 10px 0px;
     font-weight: bold;
     border-radius: 5px 5px 0px 0px;
+    color: $font-color;
 }
 
 .orderGroup{
@@ -36,7 +33,7 @@
     height: auto;
     padding: 5px 0px;
     align-self: end;
-    background-color: #1e2531;
+    background-color: $background-color;
 }
 
 .orderGroup:last-of-type{
@@ -52,9 +49,10 @@
     flex-direction: column;
     width: 100%;
     justify-content: space-around;
-    padding: 5px 0px;
+    padding: 7px 0px;
     text-align: center;
 }
+
 .columnSupplier{
     display: flex;
     flex-direction: column;
@@ -64,4 +62,15 @@
     padding: 5px 0px;
     text-align: center;
     font-weight: 500;
+}
+
+/* Small devices (portrait tablets and large phones, 768px and down) */
+@media only screen and (max-width: 768px) {
+    .tableHeader {
+        font-size: 0.8rem;
+    }
+
+    .orderGroup{
+        font-size: 0.8rem;
+    }
 }

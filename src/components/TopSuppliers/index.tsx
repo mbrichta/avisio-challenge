@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Context } from '../../Context';
-import { DashboardProps, Order, PieChartData, SupplierData } from '../../types';
+import { Context } from '../../context';
+import { DashboardProps, PieChartData, SupplierData } from '../../types';
 import ChartInfo from '../ChartInfo';
 import PieChart from '../Charts/PieChart';
 import Filter from '../Filter';
@@ -10,7 +10,7 @@ const TopSuppliers: React.FC<DashboardProps> = ({ orders }) => {
 
     const { getUniqueValues, getTotalFromOrder } = useContext(Context);
 
-    const [filter, setFilter] = useState<string>("Currency");
+    const [filter, setFilter] = useState<string>("currency");
     const [chartData, setChartData] = useState<PieChartData[]>([]);
 
     useEffect(() => {
@@ -21,8 +21,8 @@ const TopSuppliers: React.FC<DashboardProps> = ({ orders }) => {
     const getChartData = () => {
         const suppliersData = getSupplierData();
 
-        if (filter === "Currency") {
-            const sortedSuppliersData = suppliersData.sort((supplierA, supplierB) => supplierB.currency - supplierA.currency)
+        if (filter === "currency") {
+            const sortedSuppliersData = suppliersData.sort((supplierA, supplierB) => supplierB.currency - supplierA.currency);
             const topThreeSuppliers = sortedSuppliersData.splice(0, 3);
             const chartData: PieChartData[] = topThreeSuppliers.map(supplier => ({ id: supplier.supplier, value: supplier.currency }));
 
@@ -61,16 +61,15 @@ const TopSuppliers: React.FC<DashboardProps> = ({ orders }) => {
 
     const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const { value } = e.target;
-
         setFilter(value);
     }
 
     const renderFilters = () => {
-        const filters = ["Currency", "Quantity"];
+        const filters = ["currency", "quantity"];
 
         return (
             <Filter name={"filter"} values={filters} changeHadler={handleFilterChange} />
-        )
+        );
     }
 
     return (
