@@ -5,9 +5,10 @@ import { CHART_THEME } from '../../constants';
 
 interface Props {
     data: LineChartData[]
+    xAxisText: string
 }
 
-const LineChart: React.FC<Props> = ({ data }) => {
+const LineChart: React.FC<Props> = ({ data, xAxisText }) => {
 
     return (
         <ResponsiveLine
@@ -26,7 +27,7 @@ const LineChart: React.FC<Props> = ({ data }) => {
                 tickSize: 6,
                 tickPadding: 5,
                 tickRotation: -45,
-                legend: 'Months',
+                legend: xAxisText === 'all' ? 'Months' : 'Days',
                 legendOffset: 40,
                 legendPosition: 'middle'
             }}

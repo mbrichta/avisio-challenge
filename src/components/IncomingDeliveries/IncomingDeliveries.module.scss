@@ -48,7 +48,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    justify-content: space-around;
     padding: 7px 0px;
     text-align: center;
 }
@@ -62,6 +61,15 @@
     padding: 5px 0px;
     text-align: center;
     font-weight: 500;
+}
+
+.totalColumn {
+    border-top: solid 1px $font-color;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 5px auto 0 auto;
 }
 
 /* Small devices (portrait tablets and large phones, 768px and down) */
