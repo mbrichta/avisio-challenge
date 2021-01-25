@@ -3,39 +3,6 @@ import { ResponsivePie } from '@nivo/pie'
 import { PieChartData } from '../../types';
 import { CHART_THEME } from '../../constants';
 
-// const data = [
-//     {
-//         "id": "rust",
-//         "label": "rust",
-//         "value": 474,
-//         "color": "hsl(199, 70%, 50%)"
-//     },
-//     {
-//         "id": "elixir",
-//         "label": "elixir",
-//         "value": 59,
-//         "color": "hsl(268, 70%, 50%)"
-//     },
-//     {
-//         "id": "go",
-//         "label": "go",
-//         "value": 29,
-//         "color": "hsl(48, 70%, 50%)"
-//     },
-//     {
-//         "id": "c",
-//         "label": "c",
-//         "value": 422,
-//         "color": "hsl(232, 70%, 50%)"
-//     },
-//     {
-//         "id": "hack",
-//         "label": "hack",
-//         "value": 304,
-//         "color": "hsl(145, 70%, 50%)"
-//     }
-// ]
-
 interface Props {
     data: PieChartData[]
     filter: string

@@ -11,8 +11,7 @@ interface Props {
 const BarChart: React.FC<Props> = ({ data, filter }) => (
     <ResponsiveBar
         data={data}
-
-        keys={filter === "Currency" ? ["currency"] : ["quantity"]}
+        keys={filter === "currency" ? ["currency"] : ["quantity"]}
         indexBy="product"
         borderRadius={3}
         margin={{

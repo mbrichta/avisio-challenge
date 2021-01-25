@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
 import { Order } from '../types';
 import JSONData from '../data/orders.json';
 
@@ -32,7 +32,7 @@ const ContextProvider: React.FC = ({ children }) => {
     }
 
     const getTotalOrderVolumen = (orders: Order[]) => {
-        if (orders === undefined || orders.length == 0) {
+        if (orders === undefined || orders.length === 0) {
             return 0;
         } else {
             const orderVolumen = orders.map(order => getTotalFromOrder(order));
