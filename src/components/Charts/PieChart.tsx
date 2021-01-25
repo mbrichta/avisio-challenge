@@ -20,7 +20,7 @@ const PieChart: React.FC<Props> = ({ data, filter }) => (
         borderColor={{ from: 'color', modifiers: [['darker', 0.2]] }}
         radialLabelsSkipAngle={10}
         radialLabelsLinkColor={{ from: 'color' }}
-        sliceLabel={d => filter === "Currency" ? `${d.value}€` : d.value}
+        sliceLabel={d => filter === "currency" ? `${d.value}€` : d.value}
         sliceLabelsSkipAngle={10}
         sliceLabelsTextColor="inherit:darker(1.6)"
         theme={CHART_THEME}
