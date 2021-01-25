@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Context } from '../../context';
+import { Context } from '../../Context';
 import { DashboardProps, PieChartData, SupplierData } from '../../types';
 import ChartInfo from '../ChartInfo';
 import PieChart from '../Charts/PieChart';

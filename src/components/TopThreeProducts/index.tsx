@@ -4,7 +4,7 @@ import { DashboardProps, ProductData } from '../../types/index'
 import Filter from '../Filter';
 import styles from './TopThreeProducts.module.scss';
 import BarChart from '../Charts/BarChart';
-import { Context } from '../../context';
+import { Context } from '../../Context';
 
 const TopThreeProducts: React.FC<DashboardProps> = ({ orders }) => {
 

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Context } from '../../context';
+import { Context } from '../../Context';
 import { DashboardProps, Order } from '../../types';
 import ChartInfo from '../ChartInfo';
 import styles from './IncomingDeliveries.module.scss';

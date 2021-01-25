@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { MONTHS } from '../../constants';
-import { Context } from '../../context';
+import { Context } from '../../Context';
 import { LineChartData, DashboardProps, Order, DataPoint } from '../../types';
 import ChartInfo from '../ChartInfo';
 import LineChart from '../Charts/LineChart';

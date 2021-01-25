@@ -5,7 +5,7 @@ import TopSuppliers from '../TopSuppliers';
 import TopThreeProducts from '../TopThreeProducts';
 import TotalOrderVolumen from '../TotalOrderVolumen';
 import { LAYOUT, BREAKPOINTS, COLUMNS } from '../../constants';
-import { Context } from '../../context';
+import { Context } from '../../Context';
 import './Dashboard.scss';
 
 // Handles the responsive nature of the grid
