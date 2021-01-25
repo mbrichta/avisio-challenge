@@ -182,7 +182,7 @@ const TotalOrderVolumen: React.FC<DashboardProps> = ({ orders }) => {
                     allOption={true}
                     firstOptionText={"Full year"}
                 />
-                <LineChart data={chartData} />
+                <LineChart data={chartData} xAxisText={filters.month} />
             </div>
         </div>
     );

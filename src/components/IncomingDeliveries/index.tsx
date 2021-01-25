@@ -13,6 +13,7 @@ const IncomingDeliveries: React.FC<DashboardProps> = ({ orders }) => {
         formatDate,
         getTotalFromOrder,
         getUniqueValues,
+        getTotalOrderVolumen
     } = useContext(Context);
 
     const [incomingDeliveries, setIncomingDeliveries] = useState<Order[]>([]);
@@ -71,8 +72,11 @@ const IncomingDeliveries: React.FC<DashboardProps> = ({ orders }) => {
                     </div>
                     <div className={styles.column}>
                         {group.map(order => (
-                            <div key={order.productId}>{getTotalFromOrder(order)}</div>
+                            <div key={order.productId}>{getTotalFromOrder(order)}€</div>
                         ))}
+                        <div className={styles.totalColumn}>
+                            {getTotalOrderVolumen(group)}€
+                        </div>
                     </div>
                 </div>
             )
